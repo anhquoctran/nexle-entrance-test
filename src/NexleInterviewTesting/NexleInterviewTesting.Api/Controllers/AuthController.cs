@@ -1,4 +1,7 @@
-﻿namespace NexleInterviewTesting.Api.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+
+namespace NexleInterviewTesting.Api.Controllers
 {
     [Route("auth")]
     [ApiController]
@@ -60,6 +63,19 @@
             {
                 return BadRequest(res.Message);
             }
+        }
+
+        /// <summary>
+        /// Sign Out action
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("signout"), Authorize]
+        public new async Task<IActionResult> SignOut()
+        {
+            var userIdRaw = User.Claims.FirstOrDefault(x => x.Type == "id");
+            var userId = Convert.ToInt32(userIdRaw.Value);
+            await _authService.SignOut(userId);
+            return Succeed(204);
         }
     }
 }

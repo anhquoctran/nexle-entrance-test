@@ -1,6 +1,4 @@
-﻿using NexleInterviewTesting.Application.Dto;
-
-namespace NexleInterviewTesting.Application.Services.Abstractions
+﻿namespace NexleInterviewTesting.Application.Services.Abstractions
 {
     /// <summary>
     /// Authentication service to handle every auth operations
@@ -27,5 +25,12 @@ namespace NexleInterviewTesting.Application.Services.Abstractions
         /// <param name="input"></param>
         /// <returns></returns>
         Task<SignInResultDto> SignIn(SiginInInputDto input);
+
+        /// <summary>
+        /// Handle logout action
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task SignOut(int userId);
     }
 }

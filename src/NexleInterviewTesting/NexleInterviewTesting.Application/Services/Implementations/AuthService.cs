@@ -102,6 +102,20 @@ namespace NexleInterviewTesting.Application.Services.Implementations
             return new SignInResultDto { Success = false, Message = "Invalid username or password!" };
         }
 
+        /// <inheritdoc/>
+        public async Task SignOut(int userId)
+        {
+            await _signInManager.SignOutAsync();
+            var tokens = await _tokenRepository.GetAll().Where(x => x.UserId == userId).ToArrayAsync();
+
+            foreach (var token in tokens)
+            {
+                _tokenRepository.Delete(token.Id);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+        }
+
         private (string, string) GenerateToken(User user)
         {
             var claims = new List<Claim>
