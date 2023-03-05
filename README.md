@@ -33,8 +33,9 @@ This project is following `Clean Architecture`
 ```sh
 $ git clone https://github.com/anhquoctran/nexle-entrance-test
 ```
-- Open it in your Visual Studio by double click `src` > `NexleInterviewTesting.sln`.
-- Open `appsettings.json` in `NexleInterviewTesting.Api` project and modify the `ConnectionStrings`:
+- Open the project in your Visual Studio by double click `src` > `NexleInterviewTesting` > `NexleInterviewTesting.sln`.
+- Create `appsettings.json` in `NexleInterviewTesting.Api` project by copy all contents from`appsettings.example.json` file (because the `appsettings.json` file was ignored from git for security reasons).
+- Modify the `ConnectionStrings`:
 
 ```json
 {
