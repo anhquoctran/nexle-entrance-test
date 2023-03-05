@@ -52,7 +52,7 @@ namespace NexleInterviewTesting.Api.Controllers
         }
 
         /// <summary>
-        /// Return 200 OK response without data
+        /// Return 400 Bad Request response with error
         /// </summary>
         /// <returns></returns>
         protected IActionResult BadRequest(string error)

@@ -41,5 +41,25 @@
 
             return ServerError(message);
         }
+
+        /// <summary>
+        /// Sign In action
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("signin")]
+        public async Task<IActionResult> SignIn([FromBody] SignInInputModel model)
+        {
+            var res = await _authService.SignIn(new SiginInInputDto { Email = model.Email, Password = model.Password });
+
+            if (res.Success)
+            {
+                return Succeed(res);
+            }
+            else
+            {
+                return BadRequest(res.Message);
+            }
+        }
     }
 }
