@@ -116,6 +116,47 @@ namespace NexleInterviewTesting.Application.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
+        /// <inheritdoc/>
+        public async Task<RefreshTokenResultDto> GenerateToken(RefreshTokenInputDto refreshTokenInput)
+        {
+            var tokenitem = await _tokenRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.RefreshToken == refreshTokenInput.RefreshToken);
+
+            if (tokenitem != null)
+            {
+                var expiresIn = DateTimeOffset.FromUnixTimeMilliseconds(tokenitem.ExpireInMs);
+
+                var now = DateTimeOffset.Now;
+
+                if (now >= expiresIn)
+                {
+                    return null;
+                }
+
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == tokenitem.UserId);
+
+                var (token, refreshToken) = GenerateToken(user);
+
+                var expires = DateTimeOffset.Now.AddDays(30);
+
+                var tokenItem = new Token
+                {
+                    RefreshToken = refreshToken,
+                    UserId = tokenitem.UserId,
+                    ExpiresIn = expires.ToString(Constants.DATE_TIME_FORMAT),
+                    ExpireInMs = expires.ToUnixTimeMilliseconds()
+                };
+
+                _tokenRepository.Delete(tokenitem.Id);
+                _tokenRepository.Add(tokenItem);
+                await _unitOfWork.SaveChangesAsync();
+
+                return new RefreshTokenResultDto { RefreshToken = refreshToken, Token = token };
+            }
+
+            return null;
+        }
+
         private (string, string) GenerateToken(User user)
         {
             var claims = new List<Claim>

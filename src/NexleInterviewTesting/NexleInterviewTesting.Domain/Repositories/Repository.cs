@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace NexleInterviewTesting.Domain.Repositories
+﻿namespace NexleInterviewTesting.Domain.Repositories
 {
     /// <summary>
     /// Basic implementation of IRepository

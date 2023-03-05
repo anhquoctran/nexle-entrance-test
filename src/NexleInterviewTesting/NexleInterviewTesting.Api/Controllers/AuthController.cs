@@ -77,5 +77,26 @@ namespace NexleInterviewTesting.Api.Controllers
             await _authService.SignOut(userId);
             return Succeed(204);
         }
+
+        /// <summary>
+        /// Refresh the access token action
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("refreshToken"), Authorize]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenInputModel model)
+        {
+            var res = await _authService.GenerateToken(new RefreshTokenInputDto
+            {
+                RefreshToken = model.RefreshToken,
+            });
+
+            if (res != null)
+            {
+                return Succeed(res);
+            }
+
+            return ResourceNotFound();
+        }
     }
 }
