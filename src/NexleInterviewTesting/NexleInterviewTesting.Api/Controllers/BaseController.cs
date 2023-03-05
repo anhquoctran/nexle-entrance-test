@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NexleInterviewTesting.Application.Dto;
-using System.Net;
+﻿using System.Net;
 
 namespace NexleInterviewTesting.Api.Controllers
 {
@@ -57,7 +55,7 @@ namespace NexleInterviewTesting.Api.Controllers
         /// Return 200 OK response without data
         /// </summary>
         /// <returns></returns>
-        public IActionResult BadRequest(string error)
+        protected IActionResult BadRequest(string error)
         {
             return StatusCode((int)HttpStatusCode.BadRequest, BaseResponse<string>.BadRequest(error));
         }
@@ -66,7 +64,7 @@ namespace NexleInterviewTesting.Api.Controllers
         /// Return 500 Internal Server Error
         /// </summary>
         /// <returns></returns>
-        public IActionResult ServerError(string error)
+        protected IActionResult ServerError(string error)
         {
             return StatusCode((int)HttpStatusCode.InternalServerError, BaseResponse<string>.ServerError(error));
         }
@@ -75,7 +73,7 @@ namespace NexleInterviewTesting.Api.Controllers
         /// Return 404 Not Found response
         /// </summary>
         /// <returns></returns>
-        public IActionResult ResourceNotFound()
+        protected IActionResult ResourceNotFound()
         {
             return NotFound(BaseResponse<object>.NotFound());
         }

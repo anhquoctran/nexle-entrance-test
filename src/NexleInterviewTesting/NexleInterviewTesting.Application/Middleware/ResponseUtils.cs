@@ -1,6 +1,4 @@
-﻿using NexleInterviewTesting.Application.Dto;
-using System.Net;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace NexleInterviewTesting.Application.Middleware
 {
