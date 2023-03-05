@@ -1,4 +1,6 @@
-﻿namespace NexleInterviewTesting.Application.Services.Abstractions
+﻿using NexleInterviewTesting.Application.Dto;
+
+namespace NexleInterviewTesting.Application.Services.Abstractions
 {
     /// <summary>
     /// Authentication service to handle every auth operations
@@ -18,5 +20,12 @@
         /// <param name="email"></param>
         /// <returns></returns>
         Task<bool> IsEmailAlreadyUsed(string email);
+
+        /// <summary>
+        /// Handle login action
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<SignInResultDto> SignIn(SiginInInputDto input);
     }
 }
