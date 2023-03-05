@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using NexleInterviewTesting.Api;
 using NexleInterviewTesting.Infrastructure.DatabaseContexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +21,8 @@ builder.Services.AddDbContext<NexleDbContext>(c =>
     .LogTo(Console.WriteLine, LogLevel.Information);
 
 });
+
+builder.Services.ConfigureCustomAuth(builder.Configuration);
 
 // Custom password handling for ASP.NET Core Identity
 builder.Services.AddTransient<IPasswordHasher<User>, BcryptPasswordHasher>();
