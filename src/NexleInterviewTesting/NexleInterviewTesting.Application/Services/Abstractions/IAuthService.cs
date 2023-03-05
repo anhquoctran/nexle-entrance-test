@@ -32,5 +32,12 @@
         /// <param name="userId"></param>
         /// <returns></returns>
         Task SignOut(int userId);
+
+        /// <summary>
+        /// Generate a new access token and refresh token, then delete old refresh token
+        /// </summary>
+        /// <param name="refreshTokenInput"></param>
+        /// <returns></returns>
+        Task<RefreshTokenResultDto> GenerateToken(RefreshTokenInputDto refreshTokenInput);
     }
 }
