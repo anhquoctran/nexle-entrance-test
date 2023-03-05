@@ -1,1 +1,26 @@
-version: '3.8'
+version: '3.6'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123@@
+      MYSQL_DATABASE: entrance_test
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./sql:/tmp/sql
+    command: sh -c /docker-entrypoint-initdb.d/init.sh
+  nexle-entrance-test-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nexle-entrance-test
+    ports:
+      - "5001:80"
+    depends_on:
+      - db
+volumes:
+  dbdata:
