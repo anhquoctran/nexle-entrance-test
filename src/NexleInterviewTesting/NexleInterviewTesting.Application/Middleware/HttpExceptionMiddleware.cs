@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using NexleInterviewTesting.Infrastructure.Helpers;
-using System.Net;
 
 namespace NexleInterviewTesting.Application.Middleware
 {

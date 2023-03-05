@@ -1,0 +1,13 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using NexleInterviewTesting.Api.Models;
+global using NexleInterviewTesting.Application.Dto;
+global using NexleInterviewTesting.Application.Services.Abstractions;
+global using NexleInterviewTesting.Application.Services.Implementations;
+global using NexleInterviewTesting.Domain.Entities;
+global using NexleInterviewTesting.Infrastructure.Helpers;
+global using System;
+global using System.Text.Json;
+global using System.Threading.Tasks;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;

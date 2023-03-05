@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NexleInterviewTesting.Application.Dto;
-using System.Net;
+﻿using System.Net;
 
 namespace NexleInterviewTesting.Api.Controllers
 {
