@@ -1,27 +1,35 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NexleInterviewTesting.Api;
+using NexleInterviewTesting.Application.Middleware;
 using NexleInterviewTesting.Infrastructure.DatabaseContexts;
+using NexleInterviewTesting.Infrastructure.Helpers;
+using System.IO;
+using System.Linq;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Adding EntityFrameworkCore DbContext
-builder.Services.AddDbContext<NexleDbContext>(c =>
-{
-    var connString = builder.Configuration.GetConnectionString("Default");
-    c.UseMySql(connString, ServerVersion.AutoDetect(connString), o =>
+// Custom validation response
+builder.Services.Configure<ApiBehaviorOptions>(apiBehaviorOptions =>
+    apiBehaviorOptions.InvalidModelStateResponseFactory = (context) =>
     {
-        o.EnableRetryOnFailure();
-    })
-    .LogTo(Console.WriteLine, LogLevel.Information);
+        var modelState = context.ModelState.ToDictionary(x => JsonNamingPolicy.CamelCase.ConvertName(x.Key), x => x.Value.Errors.Select(x => x.ErrorMessage).ToArray());
+        return new BadRequestObjectResult(BaseResponse<object>.BadRequest(modelState));
+    }
+);
 
-});
+// Adding EntityFrameworkCore DbContext
+builder.Services.AddNexleDbContext(builder.Configuration);
 
+// Custom auth
 builder.Services.ConfigureCustomAuth(builder.Configuration);
 
 // Custom password handling for ASP.NET Core Identity
@@ -66,5 +74,22 @@ if (app.Environment.IsDevelopment())
     });
 
 }
+
+app.UseHttpExceptionMiddleware();
+
+app.UseExceptionHandler(appError =>
+{
+    appError.Run(async context =>
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.ContentType = "application/json";
+        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+        if (contextFeature != null)
+        {
+            var json = ResponseUtils.GetJsonResponseString(HttpStatusCode.InternalServerError);
+            await context.Response.WriteJson(json);
+        }
+    });
+});
 
 app.Run();
