@@ -162,9 +162,12 @@ namespace NexleInterviewTesting.Infrastructure.DatabaseContexts
             modelBuilder.Entity<IdentityUserLogin<int>>().ToTable("user_logins");
             modelBuilder.Entity<IdentityRoleClaim<int>>().ToTable("role_claims");
             modelBuilder.Entity<IdentityUserToken<int>>().ToTable("user_tokens");
+        }
 
-
-            
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableDetailedErrors(false);
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

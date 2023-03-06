@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"123qwe@@\"\r\n}",
+					"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"12116546766\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -149,7 +149,7 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
-			"value": "http://localhost:13583",
+			"value": "http://localhost:16442",
 			"type": "string"
 		},
 		{
