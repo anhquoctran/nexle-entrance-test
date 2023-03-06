@@ -25,6 +25,7 @@ This project is following `Clean Architecture`
 ```
 
 ### Database design
+*This project can't use existing DB from Nexle server*
 ![db_diagram](images/database_diagram.png)
 
 ### Building
