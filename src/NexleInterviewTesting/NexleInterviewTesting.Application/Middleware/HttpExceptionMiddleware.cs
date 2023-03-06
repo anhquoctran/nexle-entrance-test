@@ -23,7 +23,9 @@ namespace NexleInterviewTesting.Application.Middleware
             if (!httpContext.Response.HasStarted)
                 await _next.Invoke(httpContext);
 
-            if (httpContext.Response.StatusCode >= (int)HttpStatusCode.Unauthorized && httpContext.Response.StatusCode < (int)HttpStatusCode.NetworkAuthenticationRequired)
+            if (httpContext.Response.StatusCode >= (int)HttpStatusCode.Unauthorized && 
+                httpContext.Response.StatusCode <= (int)HttpStatusCode.NetworkAuthenticationRequired && 
+                httpContext.Response.StatusCode != (int)HttpStatusCode.InternalServerError)
             {
                 var httpStatus = (HttpStatusCode)httpContext.Response.StatusCode;
                 var json = ResponseUtils.GetJsonResponseString(httpStatus);
@@ -36,7 +38,9 @@ namespace NexleInterviewTesting.Application.Middleware
     {
         public static IApplicationBuilder UseHttpExceptionMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<HttpExceptionMiddleware>();
+            builder.UseMiddleware<HttpExceptionMiddleware>();
+
+            return builder;
         }
     }
 
