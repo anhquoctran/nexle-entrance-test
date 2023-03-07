@@ -5,12 +5,12 @@
 ### Prerequisites
 - .NET 6.0.
 - Visual Studio 2022.
-- MySQL Server 5.7.
+- MySQL Server 5.7 or [MySQL Server 8.0 with Legacy Authentication](https://dev.mysql.com/doc/mysql-installer/en/server-authentication-method.html) method.
 - Docker and Docker Compose (optional).
 
 ### Architecture
 
-This project is following `Clean Architecture`
+This project is following [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
 - **Architecture diagram**:
 
 ![nexle_test_architecture](images/nexle_architecture.drawio.png)
