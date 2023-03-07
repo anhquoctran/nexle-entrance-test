@@ -85,7 +85,7 @@ $ git clone https://github.com/anhquoctran/nexle-entrance-test
 If you need Postman collection, please import it from file `nexle_entrance_api.json` under `postman` folder. <a href="postman/nexle_entrance_api.json" target="_blank">Get it</a>.
 
 #### OpenAPI documentation (Swagger UI)
-This project has been configured to use Swagger API documentation with OpenAPI standard. If you navigate to the root of route `http://localhost:13583`, you will see the Swagger UI like this:
+This project has been configured to use Swagger API documentation with OpenAPI standard. If you navigate to the root of route `http://localhost:16442`, you will see the Swagger UI like this:
 
 ![swagger_ui](images/Screenshot_1.png)
 
