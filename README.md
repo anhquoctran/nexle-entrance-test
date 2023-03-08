@@ -5,7 +5,7 @@
 ### Prerequisites
 - .NET 6.0.
 - Visual Studio 2022.
-- MySQL Server 5.7 or [MySQL Server 8.0 with Legacy Authentication](https://dev.mysql.com/doc/mysql-installer/en/server-authentication-method.html) method.
+- MySQL Server 5.7 or later
 - Docker and Docker Compose (optional).
 
 ### Architecture
