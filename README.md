@@ -30,7 +30,7 @@ This project is following [Clean Architecture](https://www.amazon.com/Clean-Arch
 
 ### Building
 
-- Clone this repositories:
+- Clone this repository:
 ```sh
 $ git clone https://github.com/anhquoctran/nexle-entrance-test
 ```
